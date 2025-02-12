@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.google)
 }
 
 android {
@@ -47,6 +48,8 @@ dependencies {
     implementation (libs.gson)
     implementation(libs.room.runtime)
     ksp(libs.room.ksp)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
