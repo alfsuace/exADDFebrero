@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity() {
             Mushroom(id = "2", name = "Amanita muscaria", family = "Amanitaceae", description = "Tóxica, de color rojo con puntos blancos.")
         )
         val mockStickers = listOf(
-            Sticker(id = "101", photo = "https://example.com/photo1.jpg", latitude = "40.4168", longitude = "-3.7038", dateTime = "2025-02-12 14:30"),
-            Sticker(id = "102", photo = "https://example.com/photo2.jpg", latitude = "41.4036", longitude = "2.1744", dateTime = "2025-02-11 10:15"),
-            Sticker(id = "103", photo = "https://example.com/photo3.jpg", latitude = "39.4699", longitude = "-0.3763", dateTime = "2025-02-10 08:45")
+            Sticker(id = "101",mockMushrooms[0] ,photo = "https://example.com/photo1.jpg", latitude = "40.4168", longitude = "-3.7038", dateTime = "2025-02-12 14:30"),
+            Sticker(id = "102", mockMushrooms[1], photo = "https://example.com/photo2.jpg", latitude = "41.4036", longitude = "2.1744", dateTime = "2025-02-11 10:15"),
+            Sticker(id = "103", mockMushrooms[2], photo = "https://example.com/photo3.jpg", latitude = "39.4699", longitude = "-0.3763", dateTime = "2025-02-10 08:45")
         )
         val mockAlbums = listOf(
             Album(id = "A1","2 setas", mockMushrooms,stickers = listOf(mockStickers[0], mockStickers[1])),
