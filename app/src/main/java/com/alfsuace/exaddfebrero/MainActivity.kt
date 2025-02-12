@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity() {
             Album(id = "A2","1 seta" ,mockMushrooms2,stickers = listOf(mockStickers[2]))
         )
         val fs= FirestoreProvider.provideFirestore()
+        val guardarMock=AlbumRemoteDataSource(fs)
         val repo = AlbumDataRepositoryFirestore(AlbumRemoteDataSource(fs))
         val editUseCase = EditAlbumUseCase(repo)
 
@@ -112,6 +113,10 @@ class MainActivity : AppCompatActivity() {
         )
 
         GlobalScope.launch (Dispatchers.IO){
+
+            guardarMock.saveStickers(mockStickers)
+            guardarMock.saveMushrooms(mockMushrooms)
+
             Log.d("@dev", "lista base: ${repo.getAlbums()}")
             repo.saveAlbum(albumCreated)
             Log.d("@dev", repo.getAlbums().toString())

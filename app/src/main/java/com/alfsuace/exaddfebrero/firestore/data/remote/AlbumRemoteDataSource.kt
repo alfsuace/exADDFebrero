@@ -48,8 +48,8 @@ class AlbumRemoteDataSource(private val firestore: FirebaseFirestore) {
     suspend fun saveAlbum(album: Album) {
         val stickerIds = album.stickers.map { it.id }
         val mushroomIds = album.shroomAvailable.map { it.id }
-
-        firestore.collection("Album").document(album.id).set(album.toEntity(stickerIds, mushroomIds)).await()
+        val albumEntity = album.toEntity(mushroomIds, stickerIds)
+        firestore.collection("Album").document(album.id).set(albumEntity).await()
     }
 
     suspend fun deleteAlbum(album: Album) {
@@ -69,4 +69,21 @@ class AlbumRemoteDataSource(private val firestore: FirebaseFirestore) {
         val snapshot = firestore.collection("Mushroom").document(id).get().await()
         return snapshot.toObject(MushroomEntity::class.java)?.toModel()
     }
+
+    suspend fun saveStickers(stickers: List<Sticker>) {
+        val stickerCollection = firestore.collection("Sticker")
+
+        stickers.forEach { sticker ->
+            stickerCollection.document(sticker.id).set(sticker.toEntity(sticker.shroom.id)).await()
+        }
+    }
+
+    suspend fun saveMushrooms(mushrooms: List<Mushroom>) {
+        val mushroomCollection = firestore.collection("Mushroom")
+
+        mushrooms.forEach { mushroom ->
+            mushroomCollection.document(mushroom.id).set(mushroom.toEntity()).await()
+        }
+    }
+
 }
